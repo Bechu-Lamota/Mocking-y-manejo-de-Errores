@@ -39,7 +39,7 @@ class ProductsController {
           })
         }
     
-        return res.status(200).json('Success')
+        return res.status(200).json('Success, producto obtenido según su ID')
       } catch (error) {
         res.status(500).json({ error: 'ID del producto no encontrado' })
       }
@@ -50,7 +50,7 @@ class ProductsController {
         const { id, tittle, description, price, code, thumbnail, status, stock, category } = req.body
 
         if(!id || !tittle || !description || !price || !code || !thumbnail || !status || !stock || !category) {
-          CustomError.generateError({
+          throw CustomError.generateError({
             name: 'User Creation Error',
             cause: generateProductErrorInfo({ id, tittle, description, price, code, thumbnail, status, stock, category }),
             message: 'Error al tratar de crear el producto',
